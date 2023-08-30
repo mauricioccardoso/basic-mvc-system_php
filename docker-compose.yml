@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  api:
+    build: ./docker
+    container_name: api
+    restart: unless-stopped
+    command: wait-for db:3306 -t 40 -- /usr/local/bin/start.sh
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./backend:/home/php/backend
+    depends_on:
+      - db
+    networks:
+      - network-app
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_PASSWORD=mypasswordroot
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=mypassword
+    volumes:
+      - ./_dbData:/var/lib/mysql
+    networks:
+      - network-app
+
+networks:
+  network-app:
+    driver: bridge
