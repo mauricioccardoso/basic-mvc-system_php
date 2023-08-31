@@ -9,7 +9,6 @@ $rootPath = dirname(__DIR__);
 
 $app = new Application($rootPath);
 
-$app->router->get('/', 'home');
-$app->router->get('/contact', 'contact');
+require_once __DIR__ . '/../Routes/Routes.php';
 
 $app->run();
