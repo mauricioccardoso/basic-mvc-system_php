@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Application;
 use App\Core\Controller;
+use App\Core\Request;
 
 class SiteController extends Controller
 {
@@ -21,9 +22,10 @@ class SiteController extends Controller
         return $this->render('contact');
     }
 
-    public function contactStore(): array|false|string
+    public function contactStore(Request $request): array|false|string
     {
-        return $this->render('contact');
+        $body = $request->getBody();
+        return $body;
     }
 
 }
