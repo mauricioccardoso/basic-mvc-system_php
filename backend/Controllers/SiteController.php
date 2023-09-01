@@ -24,8 +24,7 @@ class SiteController extends Controller
 
     public function contactStore(Request $request): array|false|string
     {
-        $body = $request->getBody();
-        return $body;
+        return $request->getBody();
     }
 
 }
